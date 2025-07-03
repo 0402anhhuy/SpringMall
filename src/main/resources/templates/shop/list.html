@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Shop - FoodMart</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse our selection of fresh produce and groceries at FoodMart." />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <!-- Copy header from index.html -->
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="py-3 bg-light">
+      <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a th:href="@{/index.html}">Home</a></li>
+            <li class="breadcrumb-item active">Shop</li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- Shop Products -->
+    <section class="py-5">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="mb-4">Available Products</h3>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+              <!-- Product Item -->
+              <div class="col">
+                <div class="card">
+                  <img src="images/thumb-tomatoes.png" class="card-img-top" alt="Fresh Tomatoes" />
+                  <div class="card-body">
+                    <h5 class="card-title">Fresh Organic Tomatoes</h5>
+                    <p class="card-text">$4.99</p>
+                    <a href="product-detail.html" class="btn btn-primary">View Details</a>
+                  </div>
+                </div>
+              </div>
+              <!-- Repeat Product Item as needed -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5">
+      <!-- Copy footer from index.html -->
+    </footer>
+  </body>
+</html>
