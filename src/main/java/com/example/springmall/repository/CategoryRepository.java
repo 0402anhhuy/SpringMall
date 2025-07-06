@@ -7,8 +7,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface CategoryRepository {
     Category save(Category category);
-    Category findById(Long id);
+    Category findById(int id);
     List<Category> findAll();
-    void deleteById(Long id);
+    void deleteById(int id);
     Category findByName(String name);
 }

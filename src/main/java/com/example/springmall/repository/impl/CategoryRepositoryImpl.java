@@ -5,28 +5,34 @@ import com.example.springmall.repository.CategoryRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public class CategoryRepositoryImpl implements CategoryRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public Category save(Category category) {
-        if (category.getId() == null) {
+        if (category.getId() == null || category.getId() == 0 || entityManager.find(Category.class, category.getId()) == null) {
+            // Nếu là entity mới → insert
             entityManager.persist(category);
             return category;
         } else {
+            // Nếu đã có ID và tồn tại trong DB → update
             return entityManager.merge(category);
         }
     }
 
+
     @Override
-    public Category findById(Long id) {
+    public Category findById(int id) {
         return entityManager.find(Category.class, id);
     }
 
@@ -37,7 +43,7 @@ public class CategoryRepositoryImpl implements CategoryRepository {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(int id) {
         Category category = findById(id);
         if (category != null) {
             entityManager.remove(category);
@@ -50,6 +56,6 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         TypedQuery<Category> query = entityManager.createQuery(jpql, Category.class);
         query.setParameter("name", name);
         List<Category> result = query.getResultList();
-        return result.isEmpty() ? null : result.get(0);
+        return result.isEmpty() ? null : result.getFirst();
     }
 }
