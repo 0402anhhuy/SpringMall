@@ -1,76 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <body>
-    <!-- Header Fragment -->
     <header class="header" th:fragment="header">
       <nav class="navbar">
         <div class="container">
           <!-- Logo -->
           <div class="navbar-brand">
             <a th:href="@{/}">
-              <img
-                th:src="@{/images/Logo.png}"
-                alt="FoodMart Logo"
-                class="logo"
-              />
+              <img th:src="@{/images/fragments/header/Logo.jpg}" alt="FoodMart Logo" class="logo"/>
             </a>
           </div>
-
-          <!-- Toggle button (mobile menu) -->
-          <button class="navbar-toggle" id="navbar-toggle">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
 
           <!-- Menu -->
           <div class="navbar-menu" id="navbar-menu">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/shop}" title="Shop Products">
+                <a class="nav-link" th:href="@{/shop}" title="Product">
                   <div class="icon-circle">
-                    <img
-                      th:src="@{/images/ShoppingBag.png}"
-                      alt="Shop Icon"
-                      width="20"
-                      height="20"
-                    />
+                    <img class="image-path" th:src="@{/images/fragments/header/ShoppingBag.jpg}" alt="Shop Icon"/>
                   </div>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/cart}" title="Shopping Cart">
+                <a class="nav-link" th:href="@{/cart}" title="Shopping cart">
                   <div class="icon-circle">
-                    <img
-                      th:src="@{/images/ShoppingCart.png}"
-                      alt="Cart Icon"
-                      width="20"
-                      height="20"
-                    />
+                    <img class="image-path" th:src="@{/images/fragments/header/ShoppingCart.jpg}" alt="Cart Icon"/>
                   </div>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/account}" title="My Account">
+                <a class="nav-link" th:href="@{/order}" title="Check out">
                   <div class="icon-circle">
-                    <img
-                      th:src="@{/images/Account.png}"
-                      alt="User Icon"
-                      width="20"
-                      height="20"
-                    />
+                    <img class="image-path" th:src="@{/images/fragments/header/Checkout.jpg}" alt="Checkout Icon"/>
                   </div>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/account/login}" title="Login / Register">
+                <a class="nav-link" th:href="@{/account}" title="Account">
                   <div class="icon-circle">
-                    <img
-                      th:src="@{/images/Login.png}"
-                      alt="Login Icon"
-                      width="20"
-                      height="20"
-                    />
+                    <img class="image-path" th:src="@{/images/fragments/header/Account.jpg}" alt="User Icon"/>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/account/login}" title="Login">
+                  <div class="icon-circle">
+                    <img class="image-path" th:src="@{/images/fragments/header/Login.jpg}" alt="Login Icon"/>
                   </div>
                 </a>
               </li>

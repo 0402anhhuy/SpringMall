@@ -12,4 +12,5 @@ public interface CategoryService {
     List<Category> findAll();
     void deleteById(int id);
     void updateImage(int categoryId, String newImageUrl);
+    boolean deleteAll();
 }

@@ -1,61 +1,272 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Shop - FoodMart</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Browse our selection of fresh produce and groceries at FoodMart." />
+<head>
+  <title>Shop - FoodMart</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+          name="description"
+          content="Browse our selection of fresh produce and groceries at FoodMart."
+  />
 
-    <!-- CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header>
-      <!-- Copy header from index.html -->
-    </header>
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/utilities.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/components.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/product.css}" />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+          rel="stylesheet"
+  />
+</head>
+<body>
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
 
-    <!-- Breadcrumb -->
-    <section class="py-3 bg-light">
-      <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0">
-            <li class="breadcrumb-item"><a th:href="@{/index.html}">Home</a></li>
-            <li class="breadcrumb-item active">Shop</li>
-          </ol>
-        </nav>
-      </div>
-    </section>
+<!-- Breadcrumb -->
+<section class="breadcrumb-section">
+  <div class="container">
+    <nav class="breadcrumb-nav">
+      <a th:href="@{/}" class="breadcrumb-link">Trang chủ</a>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">Cửa hàng</span>
+    </nav>
+  </div>
+</section>
 
-    <!-- Shop Products -->
-    <section class="py-5">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <h3 class="mb-4">Available Products</h3>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-              <!-- Product Item -->
-              <div class="col">
-                <div class="card">
-                  <img src="images/thumb-tomatoes.png" class="card-img-top" alt="Fresh Tomatoes" />
-                  <div class="card-body">
-                    <h5 class="card-title">Fresh Organic Tomatoes</h5>
-                    <p class="card-text">$4.99</p>
-                    <a href="product-detail.html" class="btn btn-primary">View Details</a>
-                  </div>
+<!-- Main Shop Section -->
+<section class="shop-section">
+  <div class="container">
+    <div class="shop-layout">
+      <!-- Sidebar (Left) -->
+      <div class="shop-sidebar">
+        <!-- Search -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Tìm kiếm</h3>
+          <div class="search-box">
+            <input
+                    type="text"
+                    placeholder="Tìm kiếm sản phẩm..."
+                    class="search-input"
+            />
+            <button class="search-btn">
+              <img th:src="@{/images/tools/Search.jpg}" alt="Search" class="search-icon" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Danh mục sản phẩm</h3>
+          <div class="category-list">
+            <div class="category-item" th:each="category : ${categories}">
+              <a
+                      th:href="@{'/shop/category/' + ${category.id}}"
+                      class="category-link"
+              >
+                <div class="category-icon">
+                  <img
+                          th:src="@{${category.image}}"
+                          th:alt="${category.name}"
+                  />
                 </div>
+                <span class="category-name" th:text="${category.name}"
+                >Trái cây</span
+                >
+                <span
+                        class="category-count"
+                        th:text="'(' + ${productCounts[category.id]} + ')'"
+                >(12)</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Lọc theo giá</h3>
+          <div class="price-filter">
+            <div class="price-range">
+              <label for="priceRange"></label
+              ><input
+                    type="range"
+                    class="price-slider"
+                    min="0"
+                    max="500000"
+                    value="250000"
+                    id="priceRange"
+            />
+              <div class="price-values">
+                <span class="min-price">₫0</span>
+                <span class="max-price">₫500.000</span>
               </div>
-              <!-- Repeat Product Item as needed -->
+            </div>
+            <div class="price-inputs">
+              <input
+                      type="number"
+                      placeholder="Từ"
+                      class="price-input"
+                      id="minPrice"
+              />
+              <span class="price-separator">-</span>
+              <input
+                      type="number"
+                      placeholder="Đến"
+                      class="price-input"
+                      id="maxPrice"
+              />
+            </div>
+            <button class="filter-price-btn">Lọc giá</button>
+          </div>
+        </div>
+
+        <!-- Brands -->
+        <div class="sidebar-section">
+          <h3 class="sidebar-title">Thương hiệu</h3>
+          <div class="brand-filter">
+            <div class="brand-item" th:each="brand : ${brands}">
+              <label class="brand-checkbox">
+                <input
+                        type="checkbox"
+                        th:value="${brand.id}"
+                        name="brands"
+                />
+                <span class="checkmark"></span>
+                <span class="brand-name" th:text="${brand.name}"
+                >Organic Farm</span
+                >
+              </label>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="py-5">
-      <!-- Copy footer from index.html -->
-    </footer>
-  </body>
+      <!-- Main Product Area (Right) -->
+      <div class="shop-main">
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+          <div class="filter-left">
+            <h2 class="shop-title">Sản phẩm</h2>
+            <span
+                    class="product-count"
+                    th:text="'(' + ${#lists.size(products)} + ' sản phẩm)'"
+            >
+                  (24 sản phẩm)
+                </span>
+          </div>
+          <div class="filter-right">
+            <select class="sort-select">
+              <option value="default">Sắp xếp mặc định</option>
+              <option value="price-low">Giá thấp đến cao</option>
+              <option value="price-high">Giá cao đến thấp</option>
+              <option value="name">Tên A-Z</option>
+              <option value="newest">Mới nhất</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+          <div class="product-card" th:each="product : ${products}">
+            <div
+                    class="product-badge"
+                    th:if="${product.discount > 0}"
+                    th:text="'-' + ${product.discount} + '%'"
+            >
+              -20%
+            </div>
+            <button class="wishlist-btn">
+              <img th:src="@{/images/tools/Wishlist.jpg}" alt="Wishlist" class="wishlist-icon" />
+            </button>
+            <div class="product-image">
+              <a th:href="@{'/shop/product-detail?id=' + ${product.id}}">
+                <img
+                        th:src="@{${product.image}}"
+                        th:alt="${product.name}"
+                        class="product-img"
+                />
+              </a>
+            </div>
+            <div class="product-info">
+              <h3 class="product-name">
+                <a
+                        th:href="@{'/shop/product-detail?id=' + ${product.id}}"
+                        th:text="${product.name}"
+                >
+                  Cà chua tươi hữu cơ
+                </a>
+              </h3>
+              <div class="product-rating">
+                <div class="stars">
+                  <span>⭐</span>
+                  <span class="rating-score" th:text="${product.rating}"
+                  >4.5</span
+                  >
+                </div>
+                <span
+                        class="rating-count"
+                        th:text="'(' + ${product.ratingCount} + ')'"
+                >(24)</span
+                >
+              </div>
+              <div class="product-price">
+                <div th:if="${product.discount > 0}" class="original-price">
+                  <span th:text="'₫' + ${product.price}">₫50.000</span>
+                </div>
+                <div class="current-price-wrapper">
+                      <span
+                              class="current-price"
+                              th:text="'₫' + ${#numbers.formatInteger(product.price * (1 - product.discount / 100.0), 0)}"
+                      >₫45.000</span
+                      >
+                  <span
+                          class="unit-text"
+                          th:text="' / ' + ${product.unitQuantity}"
+                  >/ 500g</span
+                  >
+                </div>
+              </div>
+              <form class="product-actions">
+                <input type="hidden" name="productId" th:value="${product.id}" />
+                <input type="hidden" name="quantity" value="1" class="quantity-input" />
+                <div class="quantity-controls">
+                  <button type="button" class="qty-btn minus">-</button>
+                  <span class="qty-number">1</span>
+                  <button type="button" class="qty-btn plus">+</button>
+                </div>
+                <button type="submit" class="add-to-cart-btn">Thêm vào giỏ</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-wrapper">
+          <nav class="pagination-nav">
+            <button class="page-btn prev-btn">
+              <img class="nav-image" th:src="@{/images/tools/Left-arrow.jpg}" alt="Previous"/>
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-dots">...</span>
+            <button class="page-btn">10</button>
+            <button class="page-btn next-btn">
+              <img class="nav-image" th:src="@{/images/tools/Right-arrow.jpg}" alt="Next"/>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<!-- Scripts -->
+<script th:src="@{/js/shop.js}"></script>
+</body>
 </html>

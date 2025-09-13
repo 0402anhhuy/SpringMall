@@ -7,8 +7,12 @@ import java.util.List;
 public interface ProductRepository {
     Product save(Product product);
     Product findById(Long id);
+    Product findByName(String name);
     List<Product> findAll();
-    void deleteById(Long id);
-    List<Product> findByCategoryId(Long categoryId);
+    List<Product> findTrendingProduct();
+    List<Product> findTrendingProductByCategory(String category);
     List<Product> findByNameContaining(String categoryName);
+    long countByCategoryId(Integer categoryId);
+    void deleteById(Long id);
+    boolean deleteAll();
 }

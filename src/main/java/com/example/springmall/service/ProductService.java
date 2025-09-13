@@ -8,8 +8,12 @@ import java.util.List;
 public interface ProductService {
     Product save(Product product);
     Product findById(Long id);
+    Product findByName(String name);
     List<Product> findAll();
+    List<Product> findTrendingProduct();
+    List<Product> findTrendingProductByCategory(String category);
+    long countByCategoryId(Integer categoryId);
     void deleteById(Long id);
-    List<Product> findByCategoryId(Long categoryId);
+    boolean deleteAll();
     List<Product> searchByName(String keyword);
 }

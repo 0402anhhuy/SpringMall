@@ -3,6 +3,7 @@ package com.example.springmall.service.impl;
 import com.example.springmall.entity.Category;
 import com.example.springmall.repository.CategoryRepository;
 import com.example.springmall.service.CategoryService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +49,12 @@ public class CategoryServiceImpl implements CategoryService {
             category.setImage(newImageUrl);
             categoryRepository.save(category);
         }
+    }
+
+    @Override
+    @Transactional
+    public boolean deleteAll() {
+        categoryRepository.deleteAll();
+        return true;
     }
 }

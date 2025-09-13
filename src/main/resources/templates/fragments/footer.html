@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- Footer -->
+<footer class="footer">
+    <!-- Features Section -->
+    <section class="footer-features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img class="image-path" th:src="@{/images/fragments/footer/Delivery.jpg}" alt="Free delivery">
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Free delivery</h4>
+                        <p class="feature-description">
+                            Carefully handled and delivered with the same attention we give our quality ingredients
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img class="image-path" th:src="@{/images/fragments/footer/Check.jpg}" alt="Secure payment">
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Secure payment</h4>
+                        <p class="feature-description">
+                            Secure payment, protected by advanced encryption for safe and worry-free checkout
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img class="image-path" th:src="@{/images/fragments/footer/Quality.jpg}" alt="Quality guarantee">
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Quality guarantee</h4>
+                        <p class="feature-description">
+                            Quality guarantee, with every product carefully tested to ensure your satisfaction
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img class="image-path" th:src="@{/images/fragments/footer/Protection.jpg}" alt="Guaranteed savings">
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Guaranteed savings</h4>
+                        <p class="feature-description">
+                            Guaranteed savings, giving you the best value without compromising on quality
+                        </p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <img class="image-path" th:src="@{/images/fragments/footer/Daily.jpg}" alt="Daily offers">
+                    </div>
+                    <div class="feature-content">
+                        <h4 class="feature-title">Daily offers</h4>
+                        <p class="feature-description">
+                            Daily offers, updated regularly to bring you fresh deals and exclusive discounts every day
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Footer -->
+    <div class="footer-main">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Logo and Description -->
+                <div class="footer-column">
+                    <div class="footer-logo">
+                        <img th:src="@{/images/fragments/header/Logo.jpg}" alt="FoodMart" class="logo" />
+                    </div>
+                </div>
+
+                <!-- Ultras Column -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Ultras</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Conditions</a></li>
+                        <li><a href="#">Our Journals</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Affiliate Programme</a></li>
+                    </ul>
+                </div>
+
+                <!-- Customer Service Column 1 -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                    </ul>
+                </div>
+
+                <!-- Subscribe Column -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Subscribe Us</h4>
+                    <p class="footer-description">
+                        Subscribe to our newsletter to get updates about our grand offers.
+                    </p>
+                    <form class="footer-newsletter">
+                        <div class="newsletter-input-group">
+                            <label>
+                                <input type="email" placeholder="Email Address" class="newsletter-input"/>
+                            </label>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="copyright">&copy; 2023 FoodMart. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

@@ -2,15 +2,20 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>FoodMart</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta
       name="description"
       content="Welcome to FoodMart, your online store for fresh produce!"
     />
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/utilities.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/components.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/animations.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/home.css}"/>
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:wght@400;700&display=swap"
       rel="stylesheet"
@@ -35,7 +40,7 @@
                     Stay cool and refreshed with our all-natural fruit blends.
                     No additives, just pure, delicious goodness in every sip!
                   </p>
-                  <a th:href="@{/templates/shop/list.html}" class="btn btn-primary">Shop Now</a>
+                  <a th:href="@{/shop}" class="btn btn-primary">Shop Now</a>
                 </div>
                 <div class="banner-image">
                   <img
@@ -58,7 +63,7 @@
                   <hr class="divider" />
                   <span class="sale-label">SALE</span>
                   <h3 class="product-title">Fruits &<br />Vegetables</h3>
-                  <a th:href="@{/templates/shop/list.html}" class="shop-link">Shop Collection →</a>
+                  <a th:href="@{/shop}" class="shop-link">Shop Collection →</a>
                 </div>
                 <div class="banner-image">
                   <img
@@ -78,7 +83,7 @@
                   <hr class="divider" />
                   <span class="sale-label">SALE</span>
                   <h3 class="product-title">Baked Products</h3>
-                  <a th:href="@{/templates/shop/list.html}" class="shop-link">Shop Collection →</a>
+                  <a th:href="@{/shop}" class="shop-link">Shop Collection →</a>
                 </div>
                 <div class="banner-image">
                   <img
@@ -99,81 +104,23 @@
       <div class="container">
         <h2 class="section-title">Category</h2>
         <div class="category-carousel">
-          <button
-            class="nav-arrow nav-arrow-left"
-            id="navLeft"
-            title="Previous Categories"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button class="nav-arrow nav-arrow-left" id="navLeft" title="Previous Categories">
+            <img class="nav-image" th:src="@{/images/tools/Left-arrow.jpg}" alt="Previous">
           </button>
           <div class="category-grid" id="categoryGrid">
-            <div class="category-card">
-              <div class="category-icon">🍎</div>
-              <h3 class="category-name">Fruits & Veges</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🍞</div>
-              <h3 class="category-name">Breads & Sweets</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🍯</div>
-              <h3 class="category-name">Honey & Syrups</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🍷</div>
-              <h3 class="category-name">Beverages</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🥨</div>
-              <h3 class="category-name">Snacks</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🛍️</div>
-              <h3 class="category-name">Grocery</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🧀</div>
-              <h3 class="category-name">Dairy</h3>
-            </div>
-            <div class="category-card">
-              <div class="category-icon">🥩</div>
-              <h3 class="category-name">Meat & Fish</h3>
+            <div
+                    class="category-card"
+                    th:each="category : ${categories}"
+                    th:onclick="'window.location.href=\'/shop/category/' + ${category.id} + '\''"
+            >
+              <div class="category-icon"
+                   th:style="|background-image: url('${category.image}'); background-size: cover; background-position: center;|">
+              </div>
+              <h3 class="category-name" th:text="${category.name}">Category Name</h3>
             </div>
           </div>
-          <button
-            class="nav-arrow nav-arrow-right"
-            id="navRight"
-            title="Next Categories"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button class="nav-arrow nav-arrow-right" id="navRight" title="Next Categories">
+            <img class="nav-image" th:src="@{/images/tools/Right-arrow.jpg}" alt="Next">
           </button>
         </div>
       </div>
@@ -184,139 +131,24 @@
       <div class="container">
         <h2 class="section-title">Newly Arrived Brands</h2>
         <div class="brands-carousel">
-          <button
-            class="nav-arrow nav-arrow-left"
-            id="brandsNavLeft"
-            title="Previous Brands"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button class="nav-arrow nav-arrow-left" id="brandsNavLeft" title="Previous Products">
+            <img class="nav-image" th:src="@{/images/tools/Left-arrow.jpg}" alt="Previous">
           </button>
           <div class="brands-grid" id="brandsGrid">
-            <div class="brand-card">
+            <div class="brand-card" th:each="product : ${products}">
               <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
+                <img class="brand-img" th:src="@{${product.image}}" th:alt="${product.name}"/>
               </div>
               <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
-                </p>
-              </div>
-            </div>
-            <div class="brand-card">
-              <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes-2.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
-              </div>
-              <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
-                </p>
-              </div>
-            </div>
-            <div class="brand-card">
-              <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes-3.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
-              </div>
-              <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
-                </p>
-              </div>
-            </div>
-            <div class="brand-card">
-              <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
-              </div>
-              <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
-                </p>
-              </div>
-            </div>
-            <div class="brand-card">
-              <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes-2.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
-              </div>
-              <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
-                </p>
-              </div>
-            </div>
-            <div class="brand-card">
-              <div class="brand-image">
-                <img
-                  src="images/thumb-tomatoes-3.png"
-                  alt="Amber Jar"
-                  class="brand-img"
-                />
-              </div>
-              <div class="brand-info">
-                <h4 class="brand-name">Amber Jar</h4>
-                <p class="brand-description">
-                  Honey best nectar you wish to get
+                <h4 class="brand-name" th:text="${product.name}">Product Name</h4>
+                <p class="brand-price" th:text="'₫' + ${product.price} + ' / ' + ${product.unitQuantity}">
+                  ₫30.000 / 500g
                 </p>
               </div>
             </div>
           </div>
-          <button
-            class="nav-arrow nav-arrow-right"
-            id="brandsNavRight"
-            title="Next Brands"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+          <button class="nav-arrow nav-arrow-right" id="brandsNavRight" title="Next Products">
+            <img class="nav-image" th:src="@{/images/tools/Right-arrow.jpg}" alt="Next">
           </button>
         </div>
       </div>
@@ -329,234 +161,38 @@
           <h2 class="section-title">Trending Products</h2>
           <div class="trending-filters">
             <button class="filter-btn active" data-filter="all">ALL</button>
-            <button class="filter-btn" data-filter="fruits">
-              FRUITS & VEGES
-            </button>
+            <button class="filter-btn" data-filter="fruits">FRUITS & VEGES</button>
             <button class="filter-btn" data-filter="juices">JUICES</button>
+            <button class="filter-btn" data-filter="beverages">BEVERAGES</button>
           </div>
         </div>
         <div class="trending-grid">
-          <div class="trending-card" data-category="fruits">
-            <div class="trending-badge">-30%</div>
-            <button class="wishlist-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-            <div class="trending-image">
-              <img
-                src="images/thumb-tomatoes.png"
-                alt="Sunstar Fresh Melon Juice"
-                class="trending-img"
-              />
-            </div>
-            <div class="trending-info">
-              <h4 class="trending-name">Sunstar Fresh Melon Juice</h4>
-              <div class="trending-rating">
-                <span class="rating-text">1 UNIT</span>
-                <div class="rating-stars">
-                  <span>⭐</span>
-                  <span class="rating-score">4.5</span>
-                </div>
-              </div>
-              <div class="trending-price">$18.00</div>
-              <div class="trending-actions">
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">-</button>
-                  <span class="qty-number">1</span>
-                  <button class="qty-btn plus">+</button>
-                </div>
-                <button class="add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-          </div>
+          <div class="trending-card" th:each="product : ${trendingProducts}" th:data-category="${product.category.name.toLowerCase()}">
+            <div class="trending-badge" th:if="${product.discount > 0}" th:text="'-' + ${product.discount} + '%'">-30%</div>
 
-          <div class="trending-card" data-category="fruits">
-            <div class="trending-badge">-30%</div>
+            <!-- Wishlist Button -->
             <button class="wishlist-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
             <div class="trending-image">
-              <img
-                src="images/thumb-tomatoes-2.png"
-                alt="Sunstar Fresh Melon Juice"
-                class="trending-img"
-              />
+              <img class="trending-img" th:src="@{${product.image}}" th:alt="${product.name}"/>
             </div>
             <div class="trending-info">
-              <h4 class="trending-name">Sunstar Fresh Melon Juice</h4>
-              <div class="trending-rating">
-                <span class="rating-text">1 UNIT</span>
-                <div class="rating-stars">
+              <div class="trending-header">
+                <h4 class="trending-name" th:text="${product.name}">Product Name</h4>
+                <div class="trending-rating">
                   <span>⭐</span>
-                  <span class="rating-score">4.5</span>
+                  <span class="rating-score" th:text="${product.rating}">4.5</span>
+                  <span class="rating-count" th:text="'(' + ${product.ratingCount} + ')'">(120)</span>
                 </div>
               </div>
-              <div class="trending-price">$18.00</div>
-              <div class="trending-actions">
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">-</button>
-                  <span class="qty-number">1</span>
-                  <button class="qty-btn plus">+</button>
-                </div>
-                <button class="add-to-cart-btn">Add to Cart</button>
+              <div class="trending-price">
+                <span th:text="'₫' + ${product.price}">₫30.000</span>
+                <span class="rating-text" th:text="' / ' + ${product.unitQuantity}"> / 500g</span>
               </div>
-            </div>
-          </div>
-
-          <div class="trending-card" data-category="fruits">
-            <div class="trending-image">
-              <img
-                src="images/thumb-tomatoes-3.png"
-                alt="Sunstar Fresh Melon Juice"
-                class="trending-img"
-              />
-            </div>
-            <button class="wishlist-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-            <div class="trending-info">
-              <h4 class="trending-name">Sunstar Fresh Melon Juice</h4>
-              <div class="trending-rating">
-                <span class="rating-text">1 UNIT</span>
-                <div class="rating-stars">
-                  <span>⭐</span>
-                  <span class="rating-score">4.5</span>
-                </div>
-              </div>
-              <div class="trending-price">$18.00</div>
-              <div class="trending-actions">
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">-</button>
-                  <span class="qty-number">1</span>
-                  <button class="qty-btn plus">+</button>
-                </div>
-                <button class="add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="trending-card" data-category="juices">
-            <button class="wishlist-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-            <div class="trending-image">
-              <img
-                src="images/thumb-tomatoes.png"
-                alt="Sunstar Fresh Melon Juice"
-                class="trending-img"
-              />
-            </div>
-            <div class="trending-info">
-              <h4 class="trending-name">Sunstar Fresh Melon Juice</h4>
-              <div class="trending-rating">
-                <span class="rating-text">1 UNIT</span>
-                <div class="rating-stars">
-                  <span>⭐</span>
-                  <span class="rating-score">4.5</span>
-                </div>
-              </div>
-              <div class="trending-price">$18.00</div>
-              <div class="trending-actions">
-                <div class="quantity-controls">
-                  <button class="qty-btn minus">-</button>
-                  <span class="qty-number">1</span>
-                  <button class="qty-btn plus">+</button>
-                </div>
-                <button class="add-to-cart-btn">Add to Cart</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="trending-card" data-category="juices">
-            <button class="wishlist-btn">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </button>
-            <div class="trending-image">
-              <img
-                src="images/thumb-tomatoes-2.png"
-                alt="Sunstar Fresh Melon Juice"
-                class="trending-img"
-              />
-            </div>
-            <div class="trending-info">
-              <h4 class="trending-name">Sunstar Fresh Melon Juice</h4>
-              <div class="trending-rating">
-                <span class="rating-text">1 UNIT</span>
-                <div class="rating-stars">
-                  <span>⭐</span>
-                  <span class="rating-score">4.5</span>
-                </div>
-              </div>
-              <div class="trending-price">$18.00</div>
               <div class="trending-actions">
                 <div class="quantity-controls">
                   <button class="qty-btn minus">-</button>
@@ -779,254 +415,6 @@
               </p>
             </div>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Featured Products -->
-    <section class="featured-products">
-      <div class="container">
-        <div class="featured-header">
-          <h2 class="section-title">Most popular products</h2>
-          <a th:href="@{/templates/shop/list.html}" class="view-all-btn">View All Categories</a>
-        </div>
-
-        <div class="featured-carousel-wrapper">
-          <button class="carousel-nav prev" id="featuredPrev">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m15 18-6-6 6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-
-          <div class="featured-carousel-container">
-            <div class="featured-products-grid" id="featuredProductsGrid">
-              <div class="featured-product-card">
-                <div class="product-image-wrapper">
-                  <img
-                    src="images/thumb-tomatoes.png"
-                    class="product-image"
-                    alt="Fresh Tomatoes"
-                  />
-                  <button class="wishlist-btn">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div class="product-info">
-                  <h3 class="product-name">Fresh Organic Tomatoes</h3>
-                  <div class="product-rating">
-                    <div class="stars">
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star">★</span>
-                    </div>
-                    <span class="rating-count">(4.0)</span>
-                  </div>
-                  <p class="product-price">$4.99</p>
-                  <div class="product-actions">
-                    <div class="quantity-controls">
-                      <button class="qty-btn minus">-</button>
-                      <span class="qty-display">1</span>
-                      <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="featured-product-card">
-                <div class="product-image-wrapper">
-                  <img
-                    src="images/thumb-tomatoes-2.png"
-                    class="product-image"
-                    alt="Cherry Tomatoes"
-                  />
-                  <button class="wishlist-btn">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div class="product-info">
-                  <h3 class="product-name">Cherry Tomatoes</h3>
-                  <div class="product-rating">
-                    <div class="stars">
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                    </div>
-                    <span class="rating-count">(5.0)</span>
-                  </div>
-                  <p class="product-price">$3.49</p>
-                  <div class="product-actions">
-                    <div class="quantity-controls">
-                      <button class="qty-btn minus">-</button>
-                      <span class="qty-display">1</span>
-                      <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="featured-product-card">
-                <div class="product-image-wrapper">
-                  <img
-                    src="images/thumb-tomatoes-3.png"
-                    class="product-image"
-                    alt="Organic Tomatoes"
-                  />
-                  <button class="wishlist-btn">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div class="product-info">
-                  <h3 class="product-name">Organic Vine Tomatoes</h3>
-                  <div class="product-rating">
-                    <div class="stars">
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star">★</span>
-                    </div>
-                    <span class="rating-count">(4.5)</span>
-                  </div>
-                  <p class="product-price">$5.99</p>
-                  <div class="product-actions">
-                    <div class="quantity-controls">
-                      <button class="qty-btn minus">-</button>
-                      <span class="qty-display">1</span>
-                      <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="featured-product-card">
-                <div class="product-image-wrapper">
-                  <img
-                    src="images/thumb-tomatoes.png"
-                    class="product-image"
-                    alt="Roma Tomatoes"
-                  />
-                  <button class="wishlist-btn">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <div class="product-info">
-                  <h3 class="product-name">Roma Tomatoes</h3>
-                  <div class="product-rating">
-                    <div class="stars">
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star active">★</span>
-                      <span class="star">★</span>
-                    </div>
-                    <span class="rating-count">(4.2)</span>
-                  </div>
-                  <p class="product-price">$4.49</p>
-                  <div class="product-actions">
-                    <div class="quantity-controls">
-                      <button class="qty-btn minus">-</button>
-                      <span class="qty-display">1</span>
-                      <button class="qty-btn plus">+</button>
-                    </div>
-                    <button class="add-to-cart-btn">Add to Cart</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <button class="carousel-nav next" id="featuredNext">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="m9 18 6-6-6-6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
         </div>
       </div>
     </section>
@@ -1299,233 +687,8 @@
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-      <!-- Features Section -->
-      <section class="footer-features">
-        <div class="container">
-          <div class="features-grid">
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.293 2.293c-.63.63-.184 1.707.707 1.707H19M7 13v6a2 2 0 002 2h8a2 2 0 002-2v-6m-9 4h4"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4 class="feature-title">Free delivery</h4>
-                <p class="feature-description">
-                  Crafted with care, using high-quality ingredients for everyday wellness.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4 class="feature-title">100% secure payment</h4>
-                <p class="feature-description">
-                  Crafted with care, using high-quality ingredients for everyday wellness.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M19 7.5v3.5a9.966 9.966 0 01-.086 1.272M12 20.5C16.418 20.5 20 16.918 20 12.5S16.418 4.5 12 4.5 4 8.082 4 12.5 7.582 20.5 12 20.5z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M9 9.5h6v2h-6z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4 class="feature-title">Quality guarantee</h4>
-                <p class="feature-description">
-                  Crafted with care, using high-quality ingredients for everyday wellness.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4 class="feature-title">guaranteed savings</h4>
-                <p class="feature-description">
-                  Crafted with care, using high-quality ingredients for everyday wellness.
-                </p>
-              </div>
-            </div>
-
-            <div class="feature-item">
-              <div class="feature-icon">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 8v4.5m0 2V16m8-4a8 8 0 11-16 0 8 8 0 0116 0z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <div class="feature-content">
-                <h4 class="feature-title">Daily offers</h4>
-                <p class="feature-description">
-                  Crafted with care, using high-quality ingredients for everyday wellness.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Main Footer -->
-      <div class="footer-main">
-        <div class="container">
-          <div class="footer-grid">
-            <!-- Logo and Description -->
-            <div class="footer-column">
-              <div class="footer-logo">
-                <img src="images/logo.png" alt="FoodMart" class="logo" />
-              </div>
-            </div>
-
-            <!-- Ultras Column -->
-            <div class="footer-column">
-              <h4 class="footer-title">Ultras</h4>
-              <ul class="footer-links">
-                <li><a href="#">About us</a></li>
-                <li><a href="#">Conditions</a></li>
-                <li><a href="#">Our Journals</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="#">Affiliate Programme</a></li>
-                <li><a href="#">Ultras Press</a></li>
-              </ul>
-            </div>
-
-            <!-- Customer Service Column 1 -->
-            <div class="footer-column">
-              <h4 class="footer-title">Customer Service</h4>
-              <ul class="footer-links">
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Returns & Refunds</a></li>
-                <li><a href="#">Cookie Guidelines</a></li>
-                <li><a href="#">Delivery Information</a></li>
-              </ul>
-            </div>
-
-            <!-- Customer Service Column 2 -->
-            <div class="footer-column">
-              <h4 class="footer-title">Customer Service</h4>
-              <ul class="footer-links">
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Returns & Refunds</a></li>
-                <li><a href="#">Cookie Guidelines</a></li>
-                <li><a href="#">Delivery Information</a></li>
-              </ul>
-            </div>
-
-            <!-- Subscribe Column -->
-            <div class="footer-column">
-              <h4 class="footer-title">Subscribe Us</h4>
-              <p class="footer-description">
-                Subscribe to our newsletter to get updates about our grand
-                offers.
-              </p>
-              <form class="footer-newsletter">
-                <div class="newsletter-input-group">
-                  <label>
-                    <input
-                      type="email"
-                      placeholder="Email Address"
-                      class="newsletter-input"
-                    />
-                  </label>
-                  <button type="submit" class="newsletter-btn">
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Copyright -->
-      <div class="footer-bottom">
-        <div class="container">
-          <p class="copyright">&copy; 2023 FoodMart. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+    <!--  Footer  -->
+    <div th:replace="~{fragments/footer :: footer}"></div>
 
     <!-- Scripts -->
     <script th:src="@{/js/tooltips.js}"></script>

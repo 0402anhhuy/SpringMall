@@ -6,9 +6,10 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public interface CategoryRepository {
-    Category save(Category category);
     Category findById(int id);
-    List<Category> findAll();
-    void deleteById(int id);
     Category findByName(String name);
+    List<Category> findAll();
+    Category save(Category category);
+    void deleteById(int id);
+    boolean deleteAll();
 }
