@@ -20,6 +20,4 @@ public class Customer {
 
     @Column(length = 100, nullable = false)
     private String email;
-
-
 }
