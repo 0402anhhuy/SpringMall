@@ -33,9 +33,6 @@ public class Product {
     @Column(nullable = false)
     private int discount;
 
-    @Column(length = 100)
-    private String brand;
-
     @Column(name = "expiry_date")
     private LocalDate expiryDate;
 
@@ -51,7 +48,7 @@ public class Product {
     @Column(name = "rating_count")
     private int ratingCount;
 
-    @Column(name = "origin")
+    @Column(name = "origin", nullable = false, length = 100)
     private String origin;
 
     @Column(name = "storage")
@@ -63,6 +60,13 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id",  nullable = false)
+    private Brand brand;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ViewedProduct> viewedProducts;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
