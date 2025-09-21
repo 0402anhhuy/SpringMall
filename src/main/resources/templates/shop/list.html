@@ -61,28 +61,31 @@
           <h3 class="sidebar-title">Danh mục sản phẩm</h3>
           <div class="category-list">
             <div class="category-item" th:each="category : ${categories}">
-              <a
-                      th:href="@{'/shop/category/' + ${category.id}}"
-                      class="category-link"
-              >
+              <a th:href="@{'/shop/category/' + ${category.id}}" class="category-link">
                 <div class="category-icon">
-                  <img
-                          th:src="@{${category.image}}"
-                          th:alt="${category.name}"
-                  />
+                  <img th:src="@{${category.image}}" th:alt="${category.name}"/>
                 </div>
-                <span class="category-name" th:text="${category.name}"
-                >Trái cây</span
-                >
-                <span
-                        class="category-count"
-                        th:text="'(' + ${productCounts[category.id]} + ')'"
-                >(12)</span
-                >
+                <span class="category-name" th:text="${category.name}">Trái cây</span>
+                <span class="category-count" th:text="'(' + ${productCounts[category.id]} + ')'">(12)</span>
               </a>
             </div>
           </div>
         </div>
+
+          <div class="sidebar-section">
+              <h3 class="sidebar-title">Thương hiệu</h3>
+              <div class="category-list">
+                  <div class="category-item" th:each="brand : ${brands}">
+                      <a th:href="@{'/shop/category/' + ${brand.id}}" class="category-link">
+                          <div class="category-icon">
+                              <img th:src="@{${brand.image}}" th:alt="${brand.name}"/>
+                          </div>
+                          <span class="category-name" th:text="${brand.name}">Unifarm</span>
+                          <span class="category-count" th:text="'(' + ${productCounts[brand.id]} + ')'">(12)</span>
+                      </a>
+                  </div>
+              </div>
+          </div>
 
         <!-- Price Filter -->
         <div class="sidebar-section">
