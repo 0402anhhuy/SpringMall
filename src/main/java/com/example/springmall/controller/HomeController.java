@@ -66,10 +66,5 @@ public class HomeController {
     public String profile() {
         return "account/profile";
     }
-
-    @GetMapping("/account/login")
-    public String login() {
-        return "account/login";
-    }
 }
 
